@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Al's Countdown!</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Al's Retirement Eligibility Countdown 🎉</h1>
+        <p>Today is: <strong>{{ today.strftime('%B %d, %Y') }}</strong></p>
+        <p>Rule of 80 date: <strong>January 31, 2026</strong></p>
+
+        <div id="countdown" class="countdown">
+            <div><span id="days">0</span>Days</div>
+            <div><span id="hours">0</span>Hours</div>
+            <div><span id="minutes">0</span>Minutes</div>
+            <div><span id="seconds">0</span>Seconds</div>
+        </div>
+
+        <div class="giphy-container">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnNsYzRnOG5hMjJqemdvNGJyNmwxaWR6a3NvNWR6M2FpcmY2NnR0dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0IyajjbNiRvCr7RC/giphy.gif" 
+                 alt="Excited Retirement Gif"
+                 width="300">
+        </div>
+
+    </div>
+
+    <script>
+        // Set retirement date
+        const retirementDate = new Date("2026-01-31T00:00:00");
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeDiff = retirementDate - now;
+
+            if (timeDiff <= 0) {
+                document.getElementById("countdown").innerHTML = "🎉 Happy Retirement, Al! 🎉";
+                return;
+            }
+
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+        }
+
+        // Start countdown
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
